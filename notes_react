@@ -1,0 +1,83 @@
+1. We start creating react app by importing React,ReactDom and a css file
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+
+2.React components are subclasses of React.Component class
+
+3.React components describes what to display using the "render" function
+
+4.Every React component inherits an instance property called props which encapsulates properties asigned to the component.
+    4.1 props is not meant to be altered by the child component hence it is strictly Readonly.
+    4.2 Components that require to track their changes must implement a state property passed in their constructor.
+    4.3 props can be assigned as an attribute from parent components or during component instantiation.
+        <ComponentName propName = "propValue"> Some Content Here</ComponentName>
+    
+    class Square extends React.Component {
+        constructor(props){
+            super(props);//this must always be called when implementing anything in the constructor.
+
+            this.state = {
+                value: null
+            }
+        }
+
+        render() {
+            return (
+                <button className="square" onClick={() => this.setState({value: 'X'})}>
+                {this.state.value}
+                </button>
+            );
+        }
+    }
+
+5. The HTML-like syntax (JSX) evaluates to React Element during rendering which are created using React.CreateElement() function.
+    5.1 The JSX makes it super easy to describe the UI.
+    5.2 In Javascript, return statements automatically places a semi-colon on the line they are called unless there is a
+        parenthesis that indicates starting and ending points. We use parenthesis to tell the Javascript engine where our JSX starts and ends.
+        This is to avoid rendering problems for multiple line JSX.
+
+6. Variables and Javascript Expressions can be displayed using {}
+    6.1 Displaying a property at a Text Node
+        <p> { this.props.value } </p>
+
+    6.2 Passing a prop to a child component
+        <Square value={this.state.squares[i]} />
+
+7. When passing a callback to an event, the callback must be put in a function else it would fire whenever the element renders
+    
+  7.1  <button className="square" onClick={() => alert('Click')}>
+            {this.state.value}
+        </button>
+
+8. Any component can update its state by using the this.setState(obj) function
+
+    this.setState({key: value})
+
+    Only the updated states must be passed to the object argument and React will update them accordingly
+
+9. For a child component to update a parent compnent's state, the parent component must pass a function as a prop to the 
+    child component to be called in events or procedural code
+
+    9.1 For event listening props that are passed to the child compoment, we name them as on[Event] 
+        and for event handling functions that sit on the parent component, we name them as handle[Event]
+
+10. In React, a controlled component is a component that does not maintain its own state 
+    but rather depends solely on its parent component for state changes
+
+
+11. There are 2 ways of making changes
+    a) By direct mutation
+    b) By mutating a copy of the data and replacing the original data
+
+    Avoiding direct changes to data helps to keep previous versions of the data for later use
+
+12. To create a copy of an Array, use ArrayVariable.slice() function with no arguments
+    To create a copy of an Object, use Object.assign({}, ...sources) where sources can be comma separated objects or key:value pairs
+
+
+13. In React, components can be written as a function that receives props and returns a JSX of what should be rendered.
+    This is termed as a Function Component. They do not manage their own state and only relies on their parent props for state changes
+
+

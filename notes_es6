@@ -1,0 +1,62 @@
+https://www.sitepoint.com/understanding-es6-modules/
+https://medium.com/javascript-in-plain-english/javascript-modules-for-beginners-56939088f7d9
+https://nodejs.org/api/modules.html
+
+
+//ES6 MODULES EXPORT AND IMPORT STATEMENTS//
+1.In ES6 modules, we export objects and import them in other modules
+
+2.You can export individual variables to be included in the exported object
+    export const PI = 3.1415926
+
+3.You can also export an object containing variables straight away. When no key value pairs are provided, it will assume the variable names as the keys
+    export {PI, sum}
+
+4.You can also export a default item
+    export default PI
+
+5. You can import the default item from the exported object
+    import default from "./module.js"
+
+6. You can pull specific items from the exported object using the import statement and use the "as" keyword to specify an alias
+    import {PI} from "./module.js"
+    import {sum as addFunc} from "./module.js"
+
+
+//NODE'S COMMONJS MODULES.EXPORT AND REQUIRE STATEMENT//
+1.CommonJs is a specification adopted by Nodejs for module definition. 
+
+2.A CommonJs module uses module.exports to send out public items to be called by other files
+    module.exports = {PI, sum}
+    module.exports = "hello world"
+    exports.PI = 3.142
+
+3.You can pull a CommonJs module exported item by using the require statement. The .js file extension is not necessary
+    const PI = require("./module)
+
+4.If you require a directory name, nodejs will look for an index.js file in that directory and use that file
+
+5.For absolute path, use require("/) and for relative path, include the dot notation like require("./)
+
+6.When the path supplied to the require function is not abolute or relative, node will look for the module in the node_modules directory
+beginning from the parent directory of the current module, and if not found, moves to the next parent directory till the end. 
+When not found, it throws a MODULE_NOT_FOUND exception 
+
+7. How this keyword works in javascript
+    https://www.freecodecamp.org/news/this-is-why-we-need-to-bind-event-handlers-in-class-components-in-react-f7ea1a6f93eb/
+    https://codeburst.io/binding-functions-in-react-b168d2d006cb
+    https://reactkungfu.com/2015/07/why-and-how-to-bind-methods-in-your-react-component-classes/
+    https://hackernoon.com/demystifying-this-bind-in-react-87f1c843b8b7
+
+    In javascript, the context(the this keyword) of functions are defined by how they are invoked
+    7.1 func() will use the context as Window ie. 'this' keyword will be set to the global Window object
+    7.2 obj.func() will use the context as obj ie. 'this' keyword will be set to obj
+    7.3 var foo = obj.func() shall loose the obj context when foo is called because javscript does not transfer the context of func() during assignment ie. foo will use an undefined context in 'strict mode' and Window Object in 'non-strict mode'
+    7.4 To solve the context problem in react, we need to use either arrow functions in calling event handlers or do explicit binding in the component constructor
+    7.4.1 <button type="button" onClick={ () => this.handleClick() }> Click Me </button> , may affect performance
+    7.4.2 this.handleClick = this.handleClick.bind(this) , best approach
+
+
+//KEY DIFFERENCES BETWEEN ES6 MODULES AND COMMONJS MODULES//
+1. ES6 modules are pre-parsed in order to resolve further imports before code is executed.
+2. CommonJS modules load dependencies on demand while executing the code.
